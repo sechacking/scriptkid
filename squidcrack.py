@@ -1,7 +1,7 @@
-import urllib2
 #! /usr/bin/env python
 #coding=utf-8
 #modify by robert qq:1972097
+import urllib2
 import os
 import sys
 import MySQLdb
