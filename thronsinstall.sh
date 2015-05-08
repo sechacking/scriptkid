@@ -37,6 +37,43 @@ function check_os_type() {
 	return $os_type
 }
 
+
+function checkPython() {
+    #mini V2.7.1
+    V1=2
+    V2=7
+    V3=1
+	
+    #not V3.0.0
+    V5=3
+
+    U_V1=`python -V 2>&1|awk '{print $2}'|awk -F '.' '{print $1}'`
+    U_V2=`python -V 2>&1|awk '{print $2}'|awk -F '.' '{print $2}'`
+    U_V3=`python -V 2>&1|awk '{print $2}'|awk -F '.' '{print $3}'`
+
+    echo your python version is : $U_V1.$U_V2.$U_V3
+
+    if [ $U_V1 -ge $V5 ];then
+        echo 'Your python version is not OK!'
+        return 1
+    elif [ $U_V1 -lt $V1 ];then
+        echo 'Your python version is not OK!'
+        return 1
+    elif [ $U_V1 -eq $V1 ];then
+        if [ $U_V2 -lt $V2 ];then
+            echo 'Your python version is not OK!'
+            return 1
+        elif [ $U_V2 -eq $V2 ];then
+            if [ $U_V3 -lt $V3 ];then
+                echo 'Your python version is not OK!'
+                return 1
+            fi
+        fi
+    fi
+    echo Your python version is OK!
+    return 0
+}
+
 function install_deps() {
 
 	check_os_type
@@ -94,44 +131,6 @@ function install_deps() {
 	
 	sudo rpm -vhU nmap-6.47-1.x86_64.rpm
 	sudo yum -y install git
-}
-
-
-
-function checkPython() {
-    #mini V2.7.1
-    V1=2
-    V2=7
-    V3=1
-	
-    #not V3.0.0
-    V5=3
-
-    U_V1=`python -V 2>&1|awk '{print $2}'|awk -F '.' '{print $1}'`
-    U_V2=`python -V 2>&1|awk '{print $2}'|awk -F '.' '{print $2}'`
-    U_V3=`python -V 2>&1|awk '{print $2}'|awk -F '.' '{print $3}'`
-
-    echo your python version is : $U_V1.$U_V2.$U_V3
-
-    if [ $U_V1 -ge $V5 ];then
-        echo 'Your python version is not OK!'
-        return 1
-    elif [ $U_V1 -lt $V1 ];then
-        echo 'Your python version is not OK!'
-        return 1
-    elif [ $U_V1 -eq $V1 ];then
-        if [ $U_V2 -lt $V2 ];then
-            echo 'Your python version is not OK!'
-            return 1
-        elif [ $U_V2 -eq $V2 ];then
-            if [ $U_V3 -lt $V3 ];then
-                echo 'Your python version is not OK!'
-                return 1
-            fi
-        fi
-    fi
-    echo Your python version is OK!
-    return 0
 }
 
 
@@ -255,4 +254,4 @@ function main() {
  
 #install all soft
 main
-clean_build_artifacts
+clean_build_artifacts()
