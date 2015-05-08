@@ -251,11 +251,6 @@ function main() {
 	HOSTNAME=`hostname -s`
 	sed -i "s/\[program:scanclient\]/[program:scanclient_${HOSTNAME}]/g" /srv/app/thorns/src/supervisord_client.conf
 	${SUPERVISORD_BIN} -c /srv/app/thorns/src/supervisord_client.conf
-	cd /srv
-	git clone https://gitlab.com/sechacking/brootkit.git
-	chmod a+x -R /srv/brootkit
-	cd /srv/brootkit
-	./install.sh
  }
  
 #install all soft
