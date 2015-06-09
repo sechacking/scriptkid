@@ -32,5 +32,7 @@ def pass_rule():
                     if re.search('\d{4,}',line):
                         if is_legal_pwd(line)!=False:
                             newfile.writelines(line+'\n')
+					else:
+						newfile.writelines(line + '\n')
 
 pass_rule()
